@@ -279,56 +279,6 @@ app.get('/', (req, res) => {
                 </div>
             </div>
 
-            <script>
-                function decodeToken() {
-                    const tokenInput = document.getElementById('jwtToken').value.trim();
-                    const resultDiv = document.getElementById('result');
-                    const errorDiv = document.getElementById('error');
-                    const codeDiv = document.getElementById('code');
-                    const tokenInfoDiv = document.getElementById('tokenInfo');
-                    
-                    // Скрываем предыдущие результаты
-                    resultDiv.style.display = 'none';
-                    errorDiv.style.display = 'none';
-                    
-                    if (!tokenInput) {
-                        showError('Пожалуйста, введите JWT токен');
-                        return;
-                    }
-                    
-                    // Показываем загрузку
-                    codeDiv.textContent = '...';
-                    resultDiv.style.display = 'block';
-                    
-                    fetch('/api/verify', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': 'Bearer ' + tokenInput,
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.json().then(err => {
-                                throw new Error(err.error || 'Ошибка сервера');
-                            });
-                        }
-                        return response.json();
-                    })
-                }
-                
-                function showError(message) {
-                    const errorDiv = document.getElementById('error');
-                    errorDiv.textContent = message;
-                    errorDiv.style.display = 'block';
-                }
-                
-                // Пример JWT токена для тестирования
-                document.getElementById('jwtToken').value = 
-                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
-                    'eyJwYXlsb2FkIjp7IkFic0NsaWVudElEIjoiYjY5NmIyNjAtMDNlYy00NmI3LTg1NWEtYmIyYWIzZGExOTc2IiwiY2FsbFBvaW50VHlwZSI6Ilx1MDQxZlx1MDQzMFx1MDQzNlx1MDQzOFx1MDQzYlx1MDQzOCIsInByb2R1Y3RJRCI6IkFDX2FjY291bnQiLCJzdWIiOiJzdHJpbmciLCJmcmFtZUNhbGxQb2ludE5hbWUiOiJzdHJpbmcifSwiaGVhZGVyIjp7ImFsZyI6IkhTMjU2IiwidHlwIjoiSldUIn0sInNpZ25hdHVyZSI6eyJzdWIiOiJzdHJpbmcifX0.' +
-                    'fake_signature_for_demonstration_only';
-            </script>
         </body>
         </html>
     `);

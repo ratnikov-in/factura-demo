@@ -1,7 +1,7 @@
 {
-  "name": "jwt-decoder-app",
+  "name": "jwt-decoder-service",
   "version": "1.0.0",
-  "description": "JWT decoder with 6-digit code generation",
+  "description": "JWT decoder service with 6-digit code generation",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
