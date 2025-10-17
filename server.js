@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Секретный ключ для проверки JWT
-const SECRET_KEY = 'your_secret_key';
+const SECRET_KEY = 'a-string-secret-at-least-256-bits-long';
 
 // Функция для генерации 6-значного кода из UUID
 function generateCode(uuid) {
