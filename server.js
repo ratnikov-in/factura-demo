@@ -315,19 +315,6 @@ app.get('/', (req, res) => {
                         }
                         return response.json();
                     })
-                    .then(data => {
-                        codeDiv.textContent = data.code;
-                        tokenInfoDiv.innerHTML = `
-                            <p><strong>AbsClientID:</strong> ${data.decoded.payload.AbsClientID}</p>
-                            <p><strong>Тип вызова:</strong> ${data.decoded.payload.callPointType}</p>
-                            <p><strong>Product ID:</strong> ${data.decoded.payload.productID}</p>
-                            <p><strong>Frame Call Point:</strong> ${data.decoded.payload.frameCallPointName}</p>
-                        `;
-                    })
-                    .catch(error => {
-                        showError(error.message);
-                        resultDiv.style.display = 'none';
-                    });
                 }
                 
                 function showError(message) {
