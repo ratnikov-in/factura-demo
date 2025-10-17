@@ -1,12 +1,17 @@
 {
-  "name": "jwt-code-generator",
+  "name": "jwt-decoder-app",
   "version": "1.0.0",
-  "description": "JWT to 6-digit code converter",
+  "description": "JWT decoder with 6-digit code generation",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
