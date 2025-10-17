@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>JWT Validator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        input { padding: 10px; margin: 5px; }
+        button { padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <h1>Проверка JWT токена</h1>
+    <input type="text" id="tokenInput" placeholder="Введите JWT токен">
+    <button onclick="validateToken()">Проверить</button>
+    <h2 id="result"></h2>
+
+    <script>
+        async function validateToken() {
+            const token = document.getElementById('tokenInput').value;
+            
+            try {
+                const response = await fetch('/api/validate', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(await response.text());
+                }
+
+                const { code } = await response.json();
+                document.getElementById('result').innerText = `Ваш код: ${code}`;
+            } catch (error) {
+                document.getElementById('result').innerText = `Ошибка: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
