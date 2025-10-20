@@ -100,7 +100,7 @@ app.get('/code', (req, res) => {
     </head>
     <body>
         <div class="code-container">
-            <div class="label">Ваш код авторизации:</div>
+            <div class="label">Ваш код приведи друга:</div>
             <div class="code">${code}</div>
             <div style="color: #999; font-size: 0.9rem;">Код действителен в течение 10 минут</div>
         </div>
