@@ -72,7 +72,7 @@ setInterval(() => {
     }
   }
   console.log(`Cleaned expired codes. Current storage size: ${codeStorage.size}`);
-}, 5 * 60 * 1000);
+}, 60 * 60 * 1000);
 
 app.use(express.json());
 
