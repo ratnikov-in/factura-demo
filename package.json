@@ -1,7 +1,7 @@
 {
-  "name": "jwt-decoder-service",
+  "name": "jwt-code-generator",
   "version": "1.0.0",
-  "description": "JWT decoder service with 6-digit code generation",
+  "description": "JWT token processor with code generation",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -9,7 +9,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
-    "cors": "^2.8.5"
+    "crypto": "^1.0.1"
   },
   "engines": {
     "node": ">=14.0.0"
