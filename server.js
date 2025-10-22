@@ -5,8 +5,6 @@ const crypto = require('crypto');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Секретный ключ для проверки JWT (должен совпадать с ключом подписи)
-const JWT_SECRET = 'a-string-secret-at-least-256-bits-long';
 
 // Middleware для проверки JWT
 const authenticateJWT = (req, res, next) => {
@@ -16,11 +14,25 @@ const authenticateJWT = (req, res, next) => {
     const token = authHeader.split(' ')[1];
 
     try {
-      const decoded = jwt.verify(token, JWT_SECRET);
+      // Декодируем заголовок без проверки подписи
+      const decodedHeader = jwt.decode(token, { complete: true, json: true }).header;
+
+      let decoded;
+      if (decodedHeader.alg === 'RS256' && decodedHeader.x5c) {
+        // Извлекаем x5c и создаем публичный ключ
+        const x5c = decodedHeader.x5c[0];
+        const cert = `-----BEGIN CERTIFICATE-----\n${x5c}\n-----END CERTIFICATE-----`;
+        const publicKey = crypto.createPublicKey(cert);
+        decoded = jwt.verify(token, publicKey);
+      }  else {
+        return res.status(403).send("Not valid certificate");
+      }
+
       req.user = decoded;
       next();
     } catch (err) {
-      return res.sendStatus(403);
+      console.error('JWT verification failed:', err);
+      return res.status(403).send(err);
     }
   } else {
     res.sendStatus(401);
