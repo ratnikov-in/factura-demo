@@ -79,7 +79,7 @@ app.use(express.json());
 // API endpoint для получения ссылки
 app.get('/api/get-link', authenticateJWT, (req, res) => {
   try {
-    const clientId = req.user.AbsClientID.trim();
+    const clientId = req.user.absClientID.trim();
     const baseUrl = `${req.protocol}://${req.get('host')}`;
     const link = `${baseUrl}/code?clientId=${encodeURIComponent(clientId)}`;
     
