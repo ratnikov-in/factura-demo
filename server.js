@@ -83,6 +83,23 @@ app.get('/api/get-link', authenticateJWT, (req, res) => {
     });
   }
 });
+// API endpoint для получения ссылки
+app.post('/api/get-link', authenticateJWT, (req, res) => {
+  try {
+    const clientId = req.user.absClientID.trim();
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+    const link = `${baseUrl}/code?clientId=${encodeURIComponent(clientId)}`;
+
+    res.json({ 
+      url: link 
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false,
+      error: 'Internal server error' 
+    });
+  }
+});
 
 // Страница с 6-значным кодом
 app.get('/code', (req, res) => {
