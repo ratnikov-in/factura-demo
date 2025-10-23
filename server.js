@@ -6,6 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
+// Настройка CORS
 const corsOptions = {
   origin: [
     'https://balance.demo.faktura.ru',
@@ -13,7 +14,12 @@ const corsOptions = {
     'http://localhost:8080'
   ],
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization', 
+    'X-Requested-With',
+    'f-site-code' // Добавляем кастомный заголовок
+  ],
   credentials: true,
   optionsSuccessStatus: 200
 };
