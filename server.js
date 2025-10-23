@@ -14,12 +14,7 @@ const corsOptions = {
     'http://localhost:8080'
   ],
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: [
-    'Content-Type', 
-    'Authorization', 
-    'X-Requested-With',
-    'f-site-code' // Добавляем кастомный заголовок
-  ],
+  allowedHeaders: '*', // Разрешаем все заголовки
   credentials: true,
   optionsSuccessStatus: 200
 };
