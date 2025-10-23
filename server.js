@@ -1,9 +1,28 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+
+const corsOptions = {
+  origin: [
+    'https://balance.demo.faktura.ru',
+    'http://localhost:3000',
+    'http://localhost:8080'
+  ],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+// Применяем CORS middleware
+app.use(cors(corsOptions));
+
+// Обработка preflight запросов
+app.options('*', cors(corsOptions));
 
 
 // Middleware для проверки JWT
